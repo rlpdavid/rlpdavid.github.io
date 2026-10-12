@@ -1,6 +1,8 @@
 ---
 title: "Elevating Your Digital Real Estate"
 eyebrow: "The Island Monkeys"
+# White logo shown above the headline (replaces the eyebrow text); remove to show the eyebrow again
+heroLogo: "img/logo-light-islandmonkeys.png"
 description: "A premier digital agency specialising in high-performance web infrastructure, modern search visibility, and revenue-driven marketing."
 actions:
   - text: "Our Services"

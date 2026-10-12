@@ -7,8 +7,17 @@
     <div class="im-band-inner relative">
       <div
         class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8 flex flex-col items-center justify-center text-center">
-        {{ with .Params.eyebrow }}
-          <p class="im-eyebrow mt-0 mb-4 text-sm font-semibold uppercase text-primary-100">{{ . }}</p>
+        {{ with .Params.heroLogo | resources.Get }}
+          <img
+            class="im-hero-logo nozoom"
+            src="{{ .RelPermalink }}"
+            width="{{ .Width }}"
+            height="{{ .Height }}"
+            alt="{{ $.Site.Title }}">
+        {{ else }}
+          {{ with .Params.eyebrow }}
+            <p class="im-eyebrow mt-0 mb-4 text-sm font-semibold uppercase text-primary-100">{{ . }}</p>
+          {{ end }}
         {{ end }}
         <h1 class="mt-0 mb-4 text-4xl font-extrabold text-neutral-50 sm:text-5xl">
           {{ .Title }}

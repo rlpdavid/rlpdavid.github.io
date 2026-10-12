@@ -16,7 +16,7 @@ fingerprintAlgorithm = "sha512"
 [footer]
   showMenu = false
   showCopyright = true
-  showThemeAttribution = true
+  showThemeAttribution = false
   showAppearanceSwitcher = true
   showScrollToTop = true
   # 3-column footer (contact, menu, services). Set to true to show it again.

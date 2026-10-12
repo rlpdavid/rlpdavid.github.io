@@ -1,0 +1,12 @@
+{{/* Dark-mode site backdrop: flowing lines + drifting glows, fixed behind the whole page
+     (our take on Blowfish v3's backgroundCanvas). Hidden in light mode via custom.css. */}}
+{{ $bg := resources.Get "img/site-background.svg" }}
+{{ $bgStatic := resources.Get "img/site-background-static.svg" }}
+{{ if and $bg $bgStatic }}
+  <div class="im-canvas" aria-hidden="true">
+    <picture>
+      <source srcset="{{ $bgStatic.RelPermalink }}" media="(prefers-reduced-motion: reduce)">
+      <img src="{{ $bg.RelPermalink }}" alt="" class="nozoom" loading="eager" decoding="async">
+    </picture>
+  </div>
+{{ end }}
