@@ -13,13 +13,13 @@ hugoblox:
   # ────────────────────────────────────────────────────────────────────────────
   identity:
     # Site name - shown in navbar, footer, copyright, and browser title by default
-    name: "Company Name"
+    name: "The Island Monkeys"
     # Legal entity for copyright notices (defaults to name if not set)
     organization: ""
     # Schema.org type for structured data
     type: organization                        # person | organization | local_business
     # Short tagline displayed on your site
-    tagline: "The framework for Hugo."
+    tagline: "Website and IT Services Provider"
     # Site meta description for search engines and social sharing
     description: "The highly-customizable Hugo Academic theme powered by HugoBlox Kit. Easily create your personal academic website."
     # Social accounts (used for meta tags like Twitter Cards)

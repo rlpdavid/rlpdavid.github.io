@@ -1,6 +1,6 @@
 ---
 title: 'Home'
-date: 2023-10-24
+date: 2026-03-23
 type: landing
 
 design:
@@ -10,10 +10,10 @@ design:
 sections:
   - block: hero
     content:
-      title: Build Your Landing Pages with Hugo Blox
-      text: 🧱 EASY. FREE (OPEN SOURCE). NO-CODE  🧱
+      title: WE BUILD BETTER INFRASTRUCTURE
+      text: Web and IT Services Provider #🧱 EASY. FREE (OPEN SOURCE). NO-CODE  🧱
       primary_action:
-        text: Get Started
+        text: About Us
         url: https://hugoblox.com/templates/
         icon: rocket-launch
       secondary_action:
@@ -64,27 +64,27 @@ sections:
   - block: features
     id: features
     content:
-      title: Features
+      title: Services
       text: Build your site with blocks 🧱
       items:
-        - name: Optimized SEO
+        - name: Web
           icon: magnifying-glass
-          description: Automatic sitemaps, RSS feeds, and rich metadata take the pain out of SEO and syndication.
-        - name: Fast
+          description: Design, Development, Maintenance
+        - name: Content
           icon: bolt
-          description: Super fast page load with Tailwind CSS and super fast site building with Hugo.
-        - name: Easy
+          description: Copywriting, Social Media, Public relations
+        - name: Digital
           icon: sparkles
-          description: One-click deployment to GitHub Pages. Have your new website live within 5 minutes!
-        - name: No-Code
+          description: Search Engine Marketing, Advertisement
+        - name: Email
           icon: code-bracket
-          description: Edit and design your site just using rich text (Markdown) and configurable YAML parameters.
-        - name: Highly Rated
+          description: Marketing, Campaign, Newsletters
+        - name: Design
           icon: star
-          description: Rated 5-stars by the community.
-        - name: Swappable Blocks
+          description: Branding, Digital, Systems
+        - name: Business
           icon: rectangle-group
-          description: Build your pages with blocks - no coding required!
+          description: Process, Design, Support
   - block: cta-image-paragraph
     id: solutions
     content:
