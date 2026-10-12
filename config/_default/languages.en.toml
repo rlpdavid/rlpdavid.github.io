@@ -1,5 +1,5 @@
-languageCode = "en-AU"
-languageName = "English"
+locale = "en-AU"
+label = "English"
 weight = 1
 title = "The Island Monkeys"
 

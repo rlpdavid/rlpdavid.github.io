@@ -5,7 +5,7 @@ Dumaguete City, Philippines.
 
 - **Live site:** https://theislandmonkeys.com
 - **Built with:** [Hugo](https://gohugo.io) (static site generator) and the
-  [Blowfish](https://blowfish.page) theme (v2.99.0), using the `ocean` colour scheme
+  [Blowfish](https://blowfish.page) theme (v3.9.0), using the `ocean` colour scheme, on Hugo 0.167.0 extended
 - **Hosted on:** GitHub Pages, from the repo `rlpdavid/rlpdavid.github.io`
 - **Edited on:** a Proxmox LXC container (`hugo-local`, 192.168.1.45) in `/var/www/islandmonkeys`
 
@@ -48,7 +48,7 @@ modelled on [insightcreative.com](https://insightcreative.com/).
 
 | # | Section | Menu link | What it shows |
 |---|---|---|---|
-| 1 | **Hero** | – | Headline "Elevating Your Digital Real Estate", summary, two buttons |
+| 1 | **Hero** | – | Landing-style hero (modelled on Blowfish v3's Landing layout): logo, large headline "Elevating Your Digital Real Estate", summary and two buttons rise in one after another over an animated backdrop that fades out on scroll |
 | 2 | **About Us** | `#about` | Full-width tinted band: company overview and 3 philosophy cards (Foundation, Upkeep & Security, Roads & Signage) |
 | 3 | **Core Services & Tech Stack** | `#services` | 3 service cards and a row of technology tags |
 | 4 | **Industry Specializations** | `#industries` | Luxury Hospitality & Resorts, Global E-Commerce |
@@ -56,7 +56,7 @@ modelled on [insightcreative.com](https://insightcreative.com/).
 | 6 | **Why Us** | `#why-us` | "The Active Practitioner Edge" highlight panel |
 | 7 | **From the Blog** | – | 3 "Coming soon" cards until the blog is enabled |
 | 8 | **Contact band** | `#contact` | Full-width blue call-to-action with email, phone, WhatsApp, location |
-| 9 | **Footer** | – | Contact details, menu, services, copyright, light/dark switch |
+| 9 | **Footer** | – | Copyright, light/dark switch, scroll-to-top. A 3-column block (contact, menu, services) can be switched on with `showColumns` in `params.toml` |
 
 Copy source: the company Google Doc (overview, philosophy, industries, services, "Active
 Practitioner Edge").
@@ -77,8 +77,11 @@ islandmonkeys/
 │   ├── menus.en.toml              ← Top menu links
 │   └── markup.toml                ← Markdown settings (from Blowfish)
 ├── layouts/
-│   ├── partials/home/custom.html  ← One-page home layout (hero + sections)
-│   ├── partials/footer.html       ← Expanded footer (overrides the Blowfish footer)
+│   ├── partials/home/custom.html  ← One-page home layout (Landing-style hero + sections)
+│   ├── partials/footer.html       ← Blowfish v3 footer + optional 3-column block
+│   ├── partials/header/basic.html ← Blowfish v3 header + dark-mode logo (v3 dropped secondaryLogo)
+│   ├── partials/extend-footer.html← Dark-mode animated page backdrop
+│   ├── partials/favicons.html     ← Favicons generated from assets/img/favicon.jpg
 │   └── shortcodes/
 │       ├── customer.html          ← {{< customer >}} project tile
 │       └── blog-preview.html      ← {{< blog-preview >}} latest posts / "coming soon"
@@ -107,8 +110,10 @@ works.
 
 ### Page text: `content/_index.md`
 
-- **Hero:** the front matter at the top of the file (`title`, `eyebrow`, `description`, `actions`
-  for the buttons).
+- **Hero:** the front matter at the top of the file: `title` (headline), `description` (summary, also
+  the Google meta description), `actions` (buttons; `primary: true` = filled, otherwise outline),
+  `heroLogoLight` (logo in light mode) and `heroLogo` (logo in dark mode). Remove both logo lines
+  to show the `eyebrow` text instead.
 - **Sections:** each section starts with a heading such as `## Core Services & Tech Stack {#services}`.
   The `{#services}` part is the anchor that the menu links to. **Keep the anchors** unless you also
   update `menus.en.toml`.
@@ -116,6 +121,21 @@ works.
   but keep the tags, classes and `{{< icon "..." >}}` codes.
 - **Icons:** `{{< icon "shield" >}}`. The available names are the files in `themes/blowfish/assets/icons/`
   (e.g. `code`, `search`, `envelope`, `star`, `tag`, `globe`, `lightbulb`, `shield`, `phone`, `whatsapp`).
+
+### Hiding a section
+
+Wrap it in the `hide` tag. Nothing inside is published, and you can unhide it by deleting the two lines:
+
+```
+{{< hide >}}
+## From the Blog {#blog}
+…
+{{< /hide >}}
+```
+
+Don't use an HTML comment (`<!-- … -->`) for this: icons contain their own comments, which end
+yours early and break the rest of the page. Also comment out the section's menu entry in
+`config/_default/menus.en.toml`.
 
 ### Contact details
 
@@ -240,7 +260,8 @@ The home page then shows the 3 newest posts and a "View all articles" link autom
 | Light/dark default | `defaultAppearance` and `autoSwitchAppearance` in `params.toml` |
 | Header style | `[header] layout` in `params.toml` (`basic`, `fixed`, `fixed-fill`, `fixed-gradient`, `fixed-fill-blur`) |
 | Spacing, cards, bands, footer columns | `assets/css/custom.css` (all custom classes start with `im-`) |
-| Hero layout | `layouts/partials/home/custom.html` |
+| Hero layout | `layouts/partials/home/custom.html` (uses Blowfish v3's `landing-rise`, `hero-canvas-fade`, `hero-scroll-fade.js` and `cta-button` pieces) |
+| Animated backdrop | `assets/img/site-background.svg` (+ `site-background-static.svg` for reduced motion): behind the hero in light mode, behind the whole page in dark mode |
 | Favicon | Put `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png` and `apple-touch-icon.png` in `static/` |
 
 The CSS uses the theme's colour variables (e.g. `rgb(var(--color-primary-600))`), so a colour scheme
@@ -257,7 +278,7 @@ Theme documentation: https://blowfish.page/docs/
 ```bash
 cd themes/blowfish
 git fetch --tags
-git checkout v2.XX.X          # pick a release from github.com/nunocoracao/blowfish/releases
+git checkout v3.XX.X          # pick a release from github.com/nunocoracao/blowfish/releases
 cd ../..
 hugo server --bind 0.0.0.0    # check that nothing broke
 git add themes/blowfish
@@ -265,8 +286,17 @@ git add themes/blowfish
 
 Check the release notes for the minimum Hugo version.
 
-**Hugo:** the server runs Hugo 0.154.2 extended. GitHub Actions uses the version set in
-`HUGO_VERSION` in `.github/workflows/deploy.yml`. Keep the two in step.
+**Hugo:** the server runs Hugo 0.167.0 extended (`/usr/local/bin/hugo`; the previous 0.154.2 is kept as
+`/usr/local/bin/hugo-0.154.2`). Blowfish v3.9.0 needs Hugo 0.164–0.167. GitHub Actions uses the
+version set in `HUGO_VERSION` in `.github/workflows/deploy.yml`. Keep the two in step.
+
+To upgrade Hugo on the server: download `hugo_extended_<version>_linux-amd64.tar.gz` and
+`hugo_<version>_checksums.txt` from github.com/gohugoio/hugo/releases, check it with
+`grep <tarball> hugo_<version>_checksums.txt | sha256sum -c -`, then extract `hugo` to `/usr/local/bin/`.
+
+**Our overrides of theme files** (`layouts/partials/footer.html`, `layouts/partials/header/basic.html`)
+are copies of the Blowfish originals with small additions. After a theme update, compare them with
+`themes/blowfish/layouts/partials/…` and carry over any upstream changes.
 
 **Fresh clone elsewhere:** the theme must be downloaded too.
 

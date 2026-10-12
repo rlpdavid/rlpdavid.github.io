@@ -1,52 +1,86 @@
-{{/* One-page home layout: gradient hero followed by the sections in content/_index.md */}}
-<article class="max-w-full">
-  <section class="im-hero im-band im-hero-full relative overflow-hidden">
+{{/* One-page home layout: Landing-style hero (modelled on Blowfish v3's home/landing.html)
+     followed by the sections in content/_index.md. The article is its own stacking context
+     so the fixed hero backdrop stays behind every section while it fades out on scroll. */}}
+<article class="relative isolate max-w-full">
+  {{/* Light-mode hero backdrop: animated lines + glows under a soft veil, fading out on scroll.
+       Dark mode already has the full-page backdrop (partials/extend-footer.html). */}}
+  {{ $bg := resources.Get "img/site-background.svg" }}
+  {{ $bgStatic := resources.Get "img/site-background-static.svg" }}
+  {{ if and $bg $bgStatic }}
     <div
-      class="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-600 dark:from-primary-600 dark:to-secondary-800"></div>
-    <div class="im-hero-pattern absolute inset-0"></div>
-    <div class="im-band-inner relative">
-      <div
-        class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8 flex flex-col items-center justify-center text-center">
-        {{ with .Params.heroLogo | resources.Get }}
-          <img
-            class="im-hero-logo nozoom"
-            src="{{ .RelPermalink }}"
-            width="{{ .Width }}"
-            height="{{ .Height }}"
-            alt="{{ $.Site.Title }}">
-        {{ else }}
-          {{ with .Params.eyebrow }}
-            <p class="im-eyebrow mt-0 mb-4 text-sm font-semibold uppercase text-primary-100">{{ . }}</p>
+      id="landing-hero-background"
+      class="hero-canvas-fade nozoom fixed inset-x-0 top-0 -z-10 h-[640px] dark:hidden"
+      aria-hidden="true">
+      <picture>
+        <source srcset="{{ $bgStatic.RelPermalink }}" media="(prefers-reduced-motion: reduce)">
+        <img
+          class="absolute inset-0 h-full w-full object-cover nozoom"
+          src="{{ $bg.RelPermalink }}"
+          alt=""
+          loading="eager"
+          decoding="async"
+          fetchpriority="high">
+      </picture>
+      <div class="absolute inset-0 bg-neutral/60 dark:bg-neutral-800/50"></div>
+    </div>
+    {{ $heroFade := resources.Get "js/hero-scroll-fade.js" }}
+    {{ $heroFade = $heroFade | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+    <script
+      type="text/javascript"
+      src="{{ $heroFade.RelPermalink }}"
+      integrity="{{ $heroFade.Data.Integrity }}"
+      data-hero-id="landing-hero-background"
+      data-fade-distance="500"></script>
+  {{ end }}
+
+  <section class="im-landing mx-auto max-w-7xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-20 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      {{/* Logo: heroLogoLight (dark lettering) in light mode, heroLogo (white lettering) in dark mode */}}
+      {{ $logoDark := "" }}
+      {{ with .Params.heroLogo }}{{ $logoDark = resources.Get . }}{{ end }}
+      {{ $logoLight := "" }}
+      {{ with .Params.heroLogoLight }}{{ $logoLight = resources.Get . }}{{ end }}
+      {{ if or $logoDark $logoLight }}
+        <div class="landing-rise">
+          {{ with $logoLight }}
+            <div class="{{ if $logoDark }}dark:hidden{{ end }}">
+              <img class="im-hero-logo nozoom" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $.Site.Title }}">
+            </div>
           {{ end }}
+          {{ with $logoDark }}
+            <div class="{{ if $logoLight }}hidden dark:block{{ end }}">
+              <img class="im-hero-logo nozoom" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $.Site.Title }}">
+            </div>
+          {{ end }}
+        </div>
+      {{ else }}
+        {{ with .Params.eyebrow }}
+          <p class="landing-rise mb-5 text-sm font-semibold uppercase tracking-[0.25em] text-primary-600 dark:text-primary-400">
+            {{ . | markdownify }}
+          </p>
         {{ end }}
-        <h1 class="mt-0 mb-4 text-4xl font-extrabold text-neutral-50 sm:text-5xl">
-          {{ .Title }}
+      {{ end }}
+      {{ with .Title }}
+        <h1 class="landing-rise landing-rise-1 text-balance text-5xl font-black leading-[1.05] tracking-tighter text-neutral-900 dark:text-white sm:text-7xl">
+          {{ . | emojify }}
         </h1>
-        {{ with .Params.description }}
-          <p class="mt-0 mb-8 max-w-2xl text-xl text-neutral-100">{{ . | markdownify }}</p>
-        {{ end }}
-        {{ with .Params.actions }}
-          <div class="flex flex-wrap justify-center gap-4">
-            {{ range . }}
-              <a
-                class="im-btn {{ if .primary }}im-btn-primary{{ else }}im-btn-secondary{{ end }}"
-                href="{{ .url | safeURL }}">
-                {{ .text }}
-              </a>
-            {{ end }}
-          </div>
-        {{ end }}
-      </div>
+      {{ end }}
+      {{ with .Params.description }}
+        <p class="landing-rise landing-rise-2 mx-auto mt-6 max-w-3xl text-balance text-xl leading-8 text-neutral-600 dark:text-neutral-300 sm:text-2xl sm:leading-9">
+          {{ . | markdownify }}
+        </p>
+      {{ end }}
+      {{ with .Params.actions }}
+        <div class="landing-rise landing-rise-3 mt-9 flex flex-wrap items-center justify-center gap-4">
+          {{ range . }}
+            {{ partial "cta-button.html" (dict "url" .url "label" .text "style" (cond (.primary | default false) "primary" "outline")) }}
+          {{ end }}
+        </div>
+      {{ end }}
     </div>
   </section>
 
-  <div class="im-sections prose dark:prose-invert max-w-full mt-12">
+  <div class="im-sections prose dark:prose-invert max-w-full">
     {{ .Content }}
   </div>
 </article>
-
-{{ if .Site.Params.homepage.showRecent }}
-  <section>
-    {{ partial "recent-articles/main.html" . }}
-  </section>
-{{ end }}

@@ -1,7 +1,9 @@
 ---
 title: "Elevating Your Digital Real Estate"
 eyebrow: "The Island Monkeys"
-# White logo shown above the headline (replaces the eyebrow text); remove to show the eyebrow again
+# Hero logos (replace the eyebrow text; remove both to show the eyebrow again):
+#   heroLogoLight = dark lettering for light mode, heroLogo = white lettering for dark mode
+heroLogoLight: "img/logo-dark-islandmonkeys.png"
 heroLogo: "img/logo-light-islandmonkeys.png"
 description: "A premier digital agency specialising in high-performance web infrastructure, modern search visibility, and revenue-driven marketing."
 actions:
@@ -133,15 +135,16 @@ A selection of the brands we build, manage and grow.
   <p class="text-neutral-700 dark:text-neutral-300">Our team is composed of elite, active professionals who are immersed daily in the digital industry’s front lines. We do not rely on outdated agency theory; we execute using the exact, real-time strategies, algorithm updates, and technological trends shaping today's market.</p>
   <p class="text-neutral-700 dark:text-neutral-300">We deliver the agility and personalized attention of a boutique firm, backed by the cutting-edge, enterprise-level expertise of industry insiders.</p>
 </div>
-<!-- 
+{{< hide >}}
 ## From the Blog {#blog}
-Insights on web infrastructure, search and marketing. 
+
+Insights on web infrastructure, search and marketing.
 
 {{< blog-preview >}}
+{{< /hide >}}
 
 <div class="im-band im-band-cta">
 <div class="im-band-inner">
--->
 
 ## See how we can help you {#contact}
 

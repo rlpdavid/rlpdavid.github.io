@@ -15,16 +15,6 @@ body {
   scroll-margin-top: 6rem;
 }
 
-/* Hero */
-.im-hero-pattern {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
-  background-size: 22px 22px;
-}
-
-.im-eyebrow {
-  letter-spacing: 0.15em;
-}
-
 .im-btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -492,13 +482,6 @@ body {
   color: rgb(var(--color-primary-600));
 }
 
-/* Full-width hero (sits directly under the menu bar) */
-.im-hero-full {
-  margin-top: 0;
-  padding: 0;
-  border-radius: 0;
-}
-
 /* Header logo: Blowfish caps logos at 80px wide, too small for a wide wordmark */
 .main-menu img.logo {
   width: 11rem;
@@ -514,8 +497,9 @@ body {
   }
 }
 
-/* Logo above the hero headline */
+/* Logo above the hero headline (display is set on the img; light/dark switching is on its wrapper) */
 .im-hero-logo {
+  display: block;
   width: 16rem;
   max-width: 80%;
   height: auto;
