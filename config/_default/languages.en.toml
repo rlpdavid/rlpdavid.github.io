@@ -1,0 +1,18 @@
+languageCode = "en-AU"
+languageName = "English"
+weight = 1
+title = "The Island Monkeys"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "2 January 2006"
+  # Logos live in assets/img/. "dark" = black lettering (light theme), "light" = white lettering (dark theme)
+  logo = "img/logo-dark-islandmonkeys.png"
+  secondaryLogo = "img/logo-light-islandmonkeys.png"
+  description = "Digital agency for high-performance web infrastructure, SEO & GEO, and revenue-driven marketing for hospitality and e-commerce brands."
+
+  [params.author]
+    name = "The Island Monkeys"
+    headline = "Web infrastructure, search visibility and revenue-driven marketing"

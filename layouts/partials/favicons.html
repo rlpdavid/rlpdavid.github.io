@@ -1,0 +1,31 @@
+{{/* Favicons generated at build time from assets/img/favicon.jpg
+     (replaces Blowfish's default icons; picked up by the theme's head.html).
+     The source is padded to a square on white, then resized.
+     For sharp results, replace the source with a square image of at least 512x512. */}}
+{{ with resources.Get "img/favicon.jpg" }}
+  {{ $side := math.Max .Width .Height | int }}
+  {{ $padX := div (sub $side .Width) 2 }}
+  {{ $padY := div (sub $side .Height) 2 }}
+  {{ $square := . | images.Filter (images.Padding $padY $padX (sub (sub $side .Height) $padY) (sub (sub $side .Width) $padX) "#ffffff") }}
+  {{ $icon16 := ($square.Resize "16x16 png").Content | resources.FromString "im-favicon-16x16.png" }}
+  {{ $icon32 := ($square.Resize "32x32 png").Content | resources.FromString "im-favicon-32x32.png" }}
+  {{ $icon180 := ($square.Resize "180x180 png").Content | resources.FromString "im-apple-touch-icon.png" }}
+  {{ $icon192 := ($square.Resize "192x192 png").Content | resources.FromString "im-android-chrome-192x192.png" }}
+  {{ $icon512 := ($square.Resize "512x512 png").Content | resources.FromString "im-android-chrome-512x512.png" }}
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ $icon32.RelPermalink }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ $icon16.RelPermalink }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ $icon180.RelPermalink }}">
+  {{ $manifest := dict
+    "name" site.Title
+    "short_name" "Island Monkeys"
+    "icons" (slice
+      (dict "src" $icon192.RelPermalink "sizes" "192x192" "type" "image/png")
+      (dict "src" $icon512.RelPermalink "sizes" "512x512" "type" "image/png"))
+    "theme_color" "#2563eb"
+    "background_color" "#ffffff"
+    "display" "standalone"
+  }}
+  {{ with $manifest | jsonify | resources.FromString "im-site.webmanifest" }}
+    <link rel="manifest" href="{{ .RelPermalink }}">
+  {{ end }}
+{{ end }}

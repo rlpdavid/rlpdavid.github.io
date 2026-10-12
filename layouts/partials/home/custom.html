@@ -1,0 +1,43 @@
+{{/* One-page home layout: gradient hero followed by the sections in content/_index.md */}}
+<article class="max-w-full">
+  <section class="im-hero im-band im-hero-full relative overflow-hidden">
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-600 dark:from-primary-600 dark:to-secondary-800"></div>
+    <div class="im-hero-pattern absolute inset-0"></div>
+    <div class="im-band-inner relative">
+      <div
+        class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8 flex flex-col items-center justify-center text-center">
+        {{ with .Params.eyebrow }}
+          <p class="im-eyebrow mt-0 mb-4 text-sm font-semibold uppercase text-primary-100">{{ . }}</p>
+        {{ end }}
+        <h1 class="mt-0 mb-4 text-4xl font-extrabold text-neutral-50 sm:text-5xl">
+          {{ .Title }}
+        </h1>
+        {{ with .Params.description }}
+          <p class="mt-0 mb-8 max-w-2xl text-xl text-neutral-100">{{ . | markdownify }}</p>
+        {{ end }}
+        {{ with .Params.actions }}
+          <div class="flex flex-wrap justify-center gap-4">
+            {{ range . }}
+              <a
+                class="im-btn {{ if .primary }}im-btn-primary{{ else }}im-btn-secondary{{ end }}"
+                href="{{ .url | safeURL }}">
+                {{ .text }}
+              </a>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <div class="im-sections prose dark:prose-invert max-w-full mt-12">
+    {{ .Content }}
+  </div>
+</article>
+
+{{ if .Site.Params.homepage.showRecent }}
+  <section>
+    {{ partial "recent-articles/main.html" . }}
+  </section>
+{{ end }}

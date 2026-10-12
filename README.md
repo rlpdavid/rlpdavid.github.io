@@ -1,32 +1,313 @@
-# [Hugo Landing Page Theme](https://github.com/HugoBlox/hugo-theme-startup-landing-page)
+# The Island Monkeys – Website
 
-[![Screenshot](https://raw.githubusercontent.com/HugoBlox/hugo-theme-startup-landing-page/main/.github/preview.webp)](https://hugoblox.com/templates/)
+The one-page company website for **The Island Monkeys**, a website and IT services agency in
+Dumaguete City, Philippines.
 
-The Hugo **Landing Page Template** empowers you to easily create startup websites, marketing websites, and landing pages to accelerate your business growth.
+- **Live site:** https://theislandmonkeys.com
+- **Built with:** [Hugo](https://gohugo.io) (static site generator) and the
+  [Blowfish](https://blowfish.page) theme (v2.99.0), using the `ocean` colour scheme
+- **Hosted on:** GitHub Pages, from the repo `rlpdavid/rlpdavid.github.io`
+- **Edited on:** a Proxmox LXC container (`hugo-local`, 192.168.1.45) in `/var/www/islandmonkeys`
 
-️**Trusted by 250,000+ creators, teams, and organizations.** Highly customizable via the integrated **no-code, block-based website builder**, making every site truly personalized ⭐⭐⭐⭐⭐
+---
 
-[![Get Started](https://img.shields.io/badge/-Get%20started-ff4655?style=for-the-badge)](https://hugoblox.com/templates/)
-[![Discord](https://img.shields.io/discord/722225264733716590?style=for-the-badge)](https://discord.com/channels/722225264733716590/742892432458252370/742895548159492138)  
-[![Twitter Follow](https://img.shields.io/twitter/follow/MakeOwnable?label=Follow%20on%20Twitter)](https://x.com/MakeOwnable)
+## Contents
 
-[Check out the latest demo](https://theme-landing-page.netlify.app) of what you'll get in less than 10 minutes, or [view the showcase](https://hugoblox.com/creators/).
+1. [How it works](#how-it-works)
+2. [Page layout](#page-layout)
+3. [Project structure](#project-structure)
+4. [Editing content](#editing-content)
+5. [Preview locally](#preview-locally)
+6. [Publishing (going live)](#publishing-going-live)
+7. [Customers section](#customers-section)
+8. [Enabling the blog](#enabling-the-blog)
+9. [Changing the look](#changing-the-look)
+10. [Updating the theme or Hugo](#updating-the-theme-or-hugo)
+11. [Editing with VS Code](#editing-with-vs-code)
+12. [Server notes](#server-notes)
+13. [Troubleshooting](#troubleshooting)
 
-The integrated [**Hugo Blox**](https://hugoblox.com) website builder and CMS makes it easy to create a beautiful website for free. Edit your site in the CMS (or your favorite editor), generate it with [Hugo](https://github.com/gohugoio/hugo), and deploy with GitHub or Netlify. Customize anything on your site with widgets, light/dark themes, and language packs.
+---
 
-- 👉 [**Get Started**](https://hugoblox.com/templates/)
-- 📚 [View the **documentation**](https://docs.hugoblox.com/)
-- 💬 [Chat with the **HugoBlox Kit community**](https://discord.gg/z8wNYzb) or [**Hugo community**](https://discourse.gohugo.io)
-- ⬇️ **Automatically import citations from BibTeX** with the [Hugo Academic CLI](https://github.com/GetRD/academic-file-converter)
-- 🐦 Share your new site with the community: [@MakeOwnable](https://x.com/MakeOwnable)  [#MadeWithHugoBlox](https://x.com/search?q=%23MadeWithHugoBlox&src=typed_query)
-- 🗳 [Take the survey and help us improve #OpenSource](https://forms.gle/NioD9VhUg7PNmdCAA)
-- 🚀 [Contribute improvements](https://github.com/HugoBlox/kit/blob/main/CONTRIBUTING.md) or [suggest improvements](https://github.com/HugoBlox/kit/issues)
-- ⬆️ **Updating?** View the [Update Guide](https://docs.hugoblox.com/) and [Release Notes](https://github.com/HugoBlox/kit/releases)
+## How it works
 
-## We ask you, humbly, to support this open source movement
+```
+Edit files  ──►  Preview locally (hugo server)  ──►  git push to main  ──►  GitHub Actions builds  ──►  Live on theislandmonkeys.com
+```
 
-Today we ask you to defend the open source independence of the HugoBlox Kit and themes 🐧
+- The site is a set of text files (Markdown and config). Hugo turns them into a static HTML site.
+- **Every push to the `main` branch goes live automatically** through
+  `.github/workflows/deploy.yml`. Always check the local preview before pushing.
 
-We're an open source movement that depends on your support to stay online and thriving, but 99.9% of our creators don't give; they simply look the other way.
+---
 
-### [❤️ Click here to become a GitHub Sponsor, unlocking awesome perks such as _exclusive academic templates and widgets_](https://github.com/sponsors/gcushen)
+## Page layout
+
+The home page is one long page, and the menu links jump to each section. The section order is
+modelled on [insightcreative.com](https://insightcreative.com/).
+
+| # | Section | Menu link | What it shows |
+|---|---|---|---|
+| 1 | **Hero** | – | Headline "Elevating Your Digital Real Estate", summary, two buttons |
+| 2 | **About Us** | `#about` | Full-width tinted band: company overview and 3 philosophy cards (Foundation, Upkeep & Security, Roads & Signage) |
+| 3 | **Core Services & Tech Stack** | `#services` | 3 service cards and a row of technology tags |
+| 4 | **Industry Specializations** | `#industries` | Luxury Hospitality & Resorts, Global E-Commerce |
+| 5 | **Our Customers** | `#customers` | 4 project tiles (**placeholders**, see [Customers section](#customers-section)) |
+| 6 | **Why Us** | `#why-us` | "The Active Practitioner Edge" highlight panel |
+| 7 | **From the Blog** | – | 3 "Coming soon" cards until the blog is enabled |
+| 8 | **Contact band** | `#contact` | Full-width blue call-to-action with email, phone, WhatsApp, location |
+| 9 | **Footer** | – | Contact details, menu, services, copyright, light/dark switch |
+
+Copy source: the company Google Doc (overview, philosophy, industries, services, "Active
+Practitioner Edge").
+
+---
+
+## Project structure
+
+```
+islandmonkeys/
+├── content/
+│   ├── _index.md                  ← ALL home page text (edit this most)
+│   └── blog/_index.md             ← Blog section (currently disabled)
+├── config/_default/
+│   ├── hugo.toml                  ← Site URL, theme, build options
+│   ├── languages.en.toml          ← Site title, SEO description, tagline
+│   ├── params.toml                ← Theme options, colour scheme, contact details, footer services
+│   ├── menus.en.toml              ← Top menu links
+│   └── markup.toml                ← Markdown settings (from Blowfish)
+├── layouts/
+│   ├── partials/home/custom.html  ← One-page home layout (hero + sections)
+│   ├── partials/footer.html       ← Expanded footer (overrides the Blowfish footer)
+│   └── shortcodes/
+│       ├── customer.html          ← {{< customer >}} project tile
+│       └── blog-preview.html      ← {{< blog-preview >}} latest posts / "coming soon"
+├── assets/
+│   ├── css/custom.css             ← All site-specific styling (classes start with im-)
+│   └── img/
+│       ├── customer-placeholder.svg
+│       └── customers/             ← Put customer images here
+├── static/
+│   └── CNAME                      ← Custom domain for GitHub Pages (theislandmonkeys.com)
+├── themes/blowfish/               ← Blowfish theme (git submodule, do not edit)
+├── .github/workflows/deploy.yml   ← Build and deploy to GitHub Pages
+└── README.md
+```
+
+`public/` and `resources/` are generated by Hugo and ignored by git.
+
+**Rule of thumb:** never edit files inside `themes/blowfish/`. To change something from the theme,
+copy the file into the same path under the project's own `layouts/` or `assets/` folders, and edit
+that copy. Hugo uses your copy instead of the theme's. This is how `layouts/partials/footer.html`
+works.
+
+---
+
+## Editing content
+
+### Page text: `content/_index.md`
+
+- **Hero:** the front matter at the top of the file (`title`, `eyebrow`, `description`, `actions`
+  for the buttons).
+- **Sections:** each section starts with a heading such as `## Core Services & Tech Stack {#services}`.
+  The `{#services}` part is the anchor that the menu links to. **Keep the anchors** unless you also
+  update `menus.en.toml`.
+- **Cards:** these are HTML blocks such as `<div class="im-card">`. Change the text between the tags,
+  but keep the tags, classes and `{{< icon "..." >}}` codes.
+- **Icons:** `{{< icon "shield" >}}`. The available names are the files in `themes/blowfish/assets/icons/`
+  (e.g. `code`, `search`, `envelope`, `star`, `tag`, `globe`, `lightbulb`, `shield`, `phone`, `whatsapp`).
+
+### Contact details
+
+They are stored in **two places**. Update both if they change:
+
+1. `content/_index.md`, the contact band at the bottom
+2. `config/_default/params.toml`, under `[contact]` (used by the footer)
+
+Current details:
+- info@theislandmonkeys.com
+- +63 999 559 1284
+- WhatsApp +1 858 848 6908
+- Dumaguete City, Philippines
+
+### Menu: `config/_default/menus.en.toml`
+
+Each `[[main]]` entry has a `name`, a `url` (e.g. `/#customers`) and a `weight` (its position in the
+order). The footer "Menu" column uses the same list automatically.
+
+### Footer services list
+
+The `services` list under `[footer]` in `config/_default/params.toml`.
+
+### SEO / site title
+
+`config/_default/languages.en.toml`: `title`, `description` (shown by search engines) and
+`author.headline` (the footer tagline).
+
+---
+
+## Preview locally
+
+On the server, in `/var/www/islandmonkeys`:
+
+```bash
+hugo server --bind 0.0.0.0
+```
+
+Open **http://192.168.1.45:1313/** (or the Tailscale address http://100.76.139.98:1313/). The page
+reloads every time you save a file. Stop the server with `Ctrl+C`.
+
+To do a full production build and check it for errors:
+
+```bash
+hugo --gc --minify
+```
+
+---
+
+## Publishing (going live)
+
+> ⚠️ Pushing to `main` publishes to the live site within a couple of minutes. Check the local
+> preview first.
+
+```bash
+cd /var/www/islandmonkeys
+git add -A
+git commit -m "Describe what changed"
+git push origin main
+```
+
+Then watch the build under **GitHub → repo → Actions**. When it shows green, the site is live.
+
+**One-time GitHub setup (custom domain):**
+1. Go to repo **Settings → Pages**. Set Source = **GitHub Actions** and Custom domain = `theislandmonkeys.com`,
+   then tick **Enforce HTTPS** once it becomes available.
+2. At your DNS provider, do one of the following:
+   - point `theislandmonkeys.com` at the GitHub Pages A records:
+     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - or use an ALIAS/ANAME record to `rlpdavid.github.io`
+3. Add a `CNAME` record for `www` pointing to `rlpdavid.github.io`.
+
+---
+
+## Customers section
+
+The four tiles are **placeholders**. Each tile is one line in `content/_index.md`:
+
+```
+{{< customer name="Resort Name" industry="Luxury Resort" image="img/customers/resort.jpg" url="https://resort.com" >}}What we did and the result.{{< /customer >}}
+```
+
+| Option | Required | Notes |
+|---|---|---|
+| `name` | yes | Client name, shown on the image |
+| `industry` | no | Small label above the name |
+| `image` | no | A file in `assets/img/customers/`. It is automatically cropped to 16:10 and compressed. Without it, the blue placeholder is used |
+| `url` | no | Makes the whole tile a link (opens in a new tab) |
+| text between the tags | no | One-line summary under the image |
+
+You can add or remove lines freely. The grid shows 2 tiles per row on desktop and 1 per row on phones.
+
+---
+
+## Enabling the blog
+
+The blog section exists but is **switched off**: `/blog/` is not built and does not appear in the menu.
+The home page shows three "Coming soon" cards instead.
+
+To turn it on:
+1. In `content/blog/_index.md`, delete the two `build:` blocks.
+2. Add posts as `content/blog/<post-name>/index.md`, for example:
+   ```markdown
+   ---
+   title: "Why GEO Matters for Resorts"
+   date: 2026-11-01
+   summary: "One-sentence summary shown on the home page."
+   ---
+   Post text in Markdown…
+   ```
+3. Uncomment the **Blog** entry in `config/_default/menus.en.toml`.
+
+The home page then shows the 3 newest posts and a "View all articles" link automatically.
+
+---
+
+## Changing the look
+
+| What | Where |
+|---|---|
+| Colour scheme | `colorScheme` in `params.toml`. Options: `ocean` (current), `autumn`, `avocado`, `bloody`, `blowfish`, `congo`, `fire`, `forest`, `github`, `marvel`, `neon`, `noir`, `one-light`, `princess`, `slate`, `terminal`. |
+| Light/dark default | `defaultAppearance` and `autoSwitchAppearance` in `params.toml` |
+| Header style | `[header] layout` in `params.toml` (`basic`, `fixed`, `fixed-fill`, `fixed-gradient`, `fixed-fill-blur`) |
+| Spacing, cards, bands, footer columns | `assets/css/custom.css` (all custom classes start with `im-`) |
+| Hero layout | `layouts/partials/home/custom.html` |
+| Favicon | Put `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png` and `apple-touch-icon.png` in `static/` |
+
+The CSS uses the theme's colour variables (e.g. `rgb(var(--color-primary-600))`), so a colour scheme
+change recolours the custom sections too.
+
+Theme documentation: https://blowfish.page/docs/
+
+---
+
+## Updating the theme or Hugo
+
+**Blowfish** is a git submodule pinned to a release tag.
+
+```bash
+cd themes/blowfish
+git fetch --tags
+git checkout v2.XX.X          # pick a release from github.com/nunocoracao/blowfish/releases
+cd ../..
+hugo server --bind 0.0.0.0    # check that nothing broke
+git add themes/blowfish
+```
+
+Check the release notes for the minimum Hugo version.
+
+**Hugo:** the server runs Hugo 0.154.2 extended. GitHub Actions uses the version set in
+`HUGO_VERSION` in `.github/workflows/deploy.yml`. Keep the two in step.
+
+**Fresh clone elsewhere:** the theme must be downloaded too.
+
+```bash
+git clone --recurse-submodules git@github.com:rlpdavid/rlpdavid.github.io.git
+# or, in an existing clone:
+git submodule update --init --recursive
+```
+
+---
+
+## Editing with VS Code
+
+1. Install the **Remote - SSH** extension on your computer.
+2. Press F1, choose **Remote-SSH: Connect to Host**, and enter `root@192.168.1.45`.
+3. Open the folder `/var/www/islandmonkeys`.
+4. In VS Code's terminal, run `hugo server --bind 0.0.0.0` and preview at http://192.168.1.45:1313/.
+
+Avoid VS Code's Git **Sync/Push** buttons unless you mean to publish, because a push goes live.
+
+---
+
+## Server notes
+
+- **Container:** Proxmox LXC 109, Debian 12, Intel N100.
+- **Current resources:** 1 core, 2 GB RAM, 7.8 GB disk. This is tight when VS Code Remote-SSH is
+  used. **Recommended:** 2 cores, 4 GB RAM and about 16 GB disk (Proxmox → container → Resources).
+- **No Go is installed.** This is why the theme is a git submodule rather than a Hugo Module.
+- **Removed:** the site originally used the HugoBlox "Landing Page" starter. It was replaced by
+  Blowfish, and all HugoBlox files, sample pages and the npm/Tailwind tooling were removed.
+
+---
+
+## Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| Site looks unstyled, or the build says it can't find the theme | `git submodule update --init --recursive` |
+| GitHub Action fails at checkout or the theme step | Make sure `themes/blowfish` was committed (`git add themes/blowfish`) |
+| Menu link doesn't scroll to the section | The `{#anchor}` in `_index.md` must match the `url` in `menus.en.toml` |
+| Card layout broken after editing | A `<div>` or `</div>` was probably deleted. Each card block must stay together with no blank lines inside it |
+| Custom domain lost after deploy | Check that `static/CNAME` still contains `theislandmonkeys.com` |
+| Port 1313 already in use | Another `hugo server` is running. Stop it, or use `hugo server --bind 0.0.0.0 -p 1314` |
+| Page changes don't appear | Hard-refresh the browser (Ctrl+F5). If that doesn't help, restart `hugo server` |

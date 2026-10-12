@@ -1,0 +1,31 @@
+{{/* Latest blog posts for the home page.
+     While the blog is disabled (content/blog/_index.md) no posts are listed,
+     so "coming soon" placeholders are shown instead. */}}
+{{ $posts := first 3 (where site.RegularPages.ByDate.Reverse "Section" "blog") }}
+<div class="im-grid not-prose">
+  {{ range $posts }}
+    <a class="im-card im-post" href="{{ .RelPermalink }}">
+      <p class="im-post-date">{{ .Date | time.Format ":date_long" }}</p>
+      <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">{{ .Title }}</h3>
+      <p class="text-neutral-600 dark:text-neutral-400">{{ .Summary | plainify | truncate 140 }}</p>
+    </a>
+  {{ else }}
+    {{ range slice
+      (dict "icon" "search" "topic" "SEO & GEO")
+      (dict "icon" "star" "topic" "Hospitality")
+      (dict "icon" "tag" "topic" "E-Commerce")
+    }}
+      <div class="im-card im-post im-soon">
+        <span class="im-card-icon">{{ partial "icon.html" .icon }}</span>
+        <p class="im-post-date">{{ .topic }}</p>
+        <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Coming soon</h3>
+        <p class="text-neutral-600 dark:text-neutral-400">New articles are on the way. Check back soon.</p>
+      </div>
+    {{ end }}
+  {{ end }}
+</div>
+{{ with $posts }}
+  {{ with site.GetPage "/blog" }}
+    <p class="im-more not-prose"><a href="{{ .RelPermalink }}">View all articles →</a></p>
+  {{ end }}
+{{ end }}

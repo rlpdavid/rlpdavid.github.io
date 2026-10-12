@@ -1,0 +1,23 @@
+# -- Site Configuration --
+# Theme docs: https://blowfish.page/docs/configuration/
+
+theme = "blowfish"
+baseURL = "https://theislandmonkeys.com/"
+defaultContentLanguage = "en"
+
+enableRobotsTXT = true
+summaryLength = 0
+buildDrafts = false
+buildFuture = false
+enableEmoji = true
+
+# One-page site: no tag/category pages
+disableKinds = ["taxonomy", "term"]
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5

@@ -1,0 +1,26 @@
+{{/* Customer / project tile.
+     Usage: {{< customer name="Resort X" industry="Luxury Resort" image="img/customers/resort-x.jpg" url="https://..." >}}Summary{{< /customer >}}
+     image and url are optional; without an image a placeholder is shown. */}}
+{{ $name := .Get "name" | default "Client Name" }}
+{{ $img := resources.Get (.Get "image" | default "img/customer-placeholder.svg") }}
+{{ if and $img (ne $img.MediaType.SubType "svg") }}
+  {{ $img = $img.Fill "800x500 webp q85" }}
+{{ end }}
+{{ $open := `<div class="im-project">` }}
+{{ $close := `</div>` }}
+{{ with .Get "url" }}
+  {{ $open = printf `<a class="im-project" href="%s" target="_blank" rel="noopener">` (. | htmlEscape) }}
+  {{ $close = `</a>` }}
+{{ end }}
+{{ $open | safeHTML }}
+  <div class="im-project-media">
+    {{ with $img }}
+      <img src="{{ .RelPermalink }}" alt="{{ $name }}" loading="lazy" class="nozoom">
+    {{ end }}
+    <div class="im-project-caption">
+      {{ with .Get "industry" }}<p class="im-project-industry">{{ . }}</p>{{ end }}
+      <h3>{{ $name }}</h3>
+    </div>
+  </div>
+  {{ with .Inner }}<p class="im-project-summary">{{ . | markdownify }}</p>{{ end }}
+{{ $close | safeHTML }}

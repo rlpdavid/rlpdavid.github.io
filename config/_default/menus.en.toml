@@ -1,0 +1,38 @@
+# -- Main Menu --
+# One-page site: links point at section anchors on the home page.
+
+[[main]]
+  name = "About"
+  url = "/#about"
+  weight = 10
+
+[[main]]
+  name = "Services"
+  url = "/#services"
+  weight = 20
+
+[[main]]
+  name = "Industries"
+  url = "/#industries"
+  weight = 30
+
+[[main]]
+  name = "Customers"
+  url = "/#customers"
+  weight = 40
+
+[[main]]
+  name = "Why Us"
+  url = "/#why-us"
+  weight = 50
+
+[[main]]
+  name = "Contact"
+  url = "/#contact"
+  weight = 60
+
+# Uncomment once the blog is enabled
+# [[main]]
+#   name = "Blog"
+#   pageRef = "blog"
+#   weight = 70
