@@ -21,3 +21,8 @@ disableKinds = ["taxonomy", "term"]
   changefreq = "monthly"
   filename = "sitemap.xml"
   priority = 0.5
+
+# Google Analytics 4 (only added to production builds, not hugo server)
+[services]
+  [services.googleAnalytics]
+    ID = "G-S8E2FJ69HJ"

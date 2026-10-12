@@ -1,6 +1,7 @@
 <footer id="site-footer" class="py-10 print:hidden">
-  {{/* The Island Monkeys: expanded footer columns (contact, menu, services) */}}
-  {{ with .Site.Params.contact }}
+  {{/* The Island Monkeys: expanded footer columns (contact, menu, services).
+       Toggle with footer.showColumns in config/_default/params.toml */}}
+  {{ with and .Site.Params.footer.showColumns .Site.Params.contact }}
     <div class="im-footer-cols">
       <div>
         <p class="im-footer-title">{{ $.Site.Title }}</p>

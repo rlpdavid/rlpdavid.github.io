@@ -19,6 +19,8 @@ fingerprintAlgorithm = "sha512"
   showThemeAttribution = true
   showAppearanceSwitcher = true
   showScrollToTop = true
+  # 3-column footer (contact, menu, services). Set to true to show it again.
+  showColumns = false
   # Services listed in the expanded footer (layouts/partials/footer.html)
   services = [
     "Architecture & Management",

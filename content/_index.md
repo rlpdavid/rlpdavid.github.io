@@ -95,7 +95,7 @@ Deep experience where digital performance matters most.
 <div class="im-grid im-grid-2 not-prose">
   <div class="im-card">
     <span class="im-card-icon">{{< icon "star" >}}</span>
-    <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Luxury Hospitality &amp; High-End Resorts</h3>
+    <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Hospitality &amp; Resorts</h3>
     <p class="text-neutral-600 dark:text-neutral-400">We manage the digital footprint for high-end resorts, ensuring your property is positioned as a premium destination.</p>
     <ul class="text-neutral-600 dark:text-neutral-400">
       <li><strong>OTA Integration:</strong> We implement seamless Online Travel Agency (OTA) integrations to synchronize inventory, maximize occupancy rates, and ultimately drive higher margins through direct booking strategies.</li>
@@ -117,10 +117,10 @@ A selection of the brands we build, manage and grow.
      One {{</* customer */>}} line per client. Put a screenshot/photo in assets/img/customers/
      and set image="img/customers/your-file.jpg"; url is optional (links the tile). -->
 <div class="im-grid im-grid-2 not-prose">
-{{< customer name="Client Name" industry="Luxury Resort" >}}Short project summary: what we did and the result.{{< /customer >}}
-{{< customer name="Client Name" industry="Boutique Hotel" >}}Short project summary: what we did and the result.{{< /customer >}}
-{{< customer name="Client Name" industry="E-Commerce" >}}Short project summary: what we did and the result.{{< /customer >}}
-{{< customer name="Client Name" industry="Retail Brand" >}}Short project summary: what we did and the result.{{< /customer >}}
+{{< customer name="Atmosphere Resorts and Spa" industry="Luxury Resort" image="img/customers/atmosphereresorts.jpg" url="https://atmosphereresorts.com" >}}{{< /customer >}}
+{{< customer name="Liquid Dumaguete" industry="Boutique Hotel" image="img/customers/liquiddumaguete.jpg" url="https://liquiddumaguete.com" >}}{{< /customer >}}
+{{< customer name="Instructor Development Philippines" industry="Scuba Dive Center" image="img/customers/instructordevelopmentphilippines.jpg" url="https://instructordevelopmentphilippines.com">}}{{< /customer >}}
+{{< customer name="Dauin Tech Divers" industry="Specialty Scuba Center" image="img/customers/dauintechdivers.jpg" url="https://dauintechdivers.com">}}{{< /customer >}}
 </div>
 
 ## Why Us {#why-us}
@@ -131,15 +131,15 @@ A selection of the brands we build, manage and grow.
   <p class="text-neutral-700 dark:text-neutral-300">Our team is composed of elite, active professionals who are immersed daily in the digital industry’s front lines. We do not rely on outdated agency theory; we execute using the exact, real-time strategies, algorithm updates, and technological trends shaping today's market.</p>
   <p class="text-neutral-700 dark:text-neutral-300">We deliver the agility and personalized attention of a boutique firm, backed by the cutting-edge, enterprise-level expertise of industry insiders.</p>
 </div>
-
+<!-- 
 ## From the Blog {#blog}
-
-Insights on web infrastructure, search and marketing.
+Insights on web infrastructure, search and marketing. 
 
 {{< blog-preview >}}
 
 <div class="im-band im-band-cta">
 <div class="im-band-inner">
+-->
 
 ## See how we can help you {#contact}
 

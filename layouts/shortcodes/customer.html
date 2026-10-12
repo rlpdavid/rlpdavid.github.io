@@ -1,10 +1,12 @@
 {{/* Customer / project tile.
      Usage: {{< customer name="Resort X" industry="Luxury Resort" image="img/customers/resort-x.jpg" url="https://..." >}}Summary{{< /customer >}}
-     image and url are optional; without an image a placeholder is shown. */}}
+     image and url are optional; without an image a placeholder is shown.
+     anchor (optional) = which part of the image to keep when cropping to 16:10:
+     Top (default, keeps a website's logo/menu), Center, Bottom, Left, Right, TopLeft, etc. */}}
 {{ $name := .Get "name" | default "Client Name" }}
 {{ $img := resources.Get (.Get "image" | default "img/customer-placeholder.svg") }}
 {{ if and $img (ne $img.MediaType.SubType "svg") }}
-  {{ $img = $img.Fill "800x500 webp q85" }}
+  {{ $img = $img.Fill (printf "800x500 webp q85 %s" (.Get "anchor" | default "Top")) }}
 {{ end }}
 {{ $open := `<div class="im-project">` }}
 {{ $close := `</div>` }}
