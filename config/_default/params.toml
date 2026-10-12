@@ -55,3 +55,28 @@ fingerprintAlgorithm = "sha512"
   phone = "+63 999 559 1284"
   whatsapp = "+1 858 848 6908"
   location = "Dumaguete City, Philippines"
+
+# -- Local SEO: LocalBusiness structured data (layouts/partials/extend-head-uncached.html) --
+[seo]
+  addressLocality = "Dumaguete City"
+  addressRegion = "Negros Oriental"
+  addressCountry = "PH"
+  # Areas we serve; type is a schema.org place type (City or AdministrativeArea)
+  areaServed = [
+    { name = "Dumaguete City", type = "City" },
+    { name = "Dauin", type = "City" },
+    { name = "Bohol", type = "AdministrativeArea" },
+    { name = "Cebu", type = "AdministrativeArea" },
+    { name = "Davao City", type = "City" },
+  ]
+  services = [
+    "Web design & development", "WordPress", "Shopify", "Adobe Commerce (Magento)",
+    "Search engine optimisation (SEO)", "Generative engine optimisation (GEO)",
+    "Google Ads (PPC)", "Email marketing (Klaviyo, Mailchimp)",
+  ]
+
+# -- Search engine verification --
+# Google Search Console: Add property -> URL prefix https://theislandmonkeys.com/ -> HTML tag,
+# then paste the content="..." value here.
+[verification]
+  google = ""

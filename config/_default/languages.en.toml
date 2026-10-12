@@ -11,7 +11,15 @@ title = "The Island Monkeys"
   # Logos live in assets/img/. "dark" = black lettering (light theme), "light" = white lettering (dark theme)
   logo = "img/logo-dark-islandmonkeys.png"
   secondaryLogo = "img/logo-light-islandmonkeys.png"
-  description = "Digital agency for high-performance web infrastructure, SEO & GEO, and revenue-driven marketing for hospitality and e-commerce brands."
+  description = "Web design, SEO & digital marketing agency for local businesses in Dumaguete, Dauin, Bohol, Cebu and Davao. WordPress, Shopify and Google Ads experts."
+  # Used in the meta keywords tag and the WebSite schema (Google itself ignores meta keywords)
+  keywords = [
+    "web design Dumaguete", "SEO Dumaguete", "digital marketing Dumaguete",
+    "web design Dauin", "web design Bohol", "SEO Bohol",
+    "web design Cebu", "SEO Cebu", "web design Davao", "SEO Davao",
+    "WordPress developer Philippines", "Shopify developer Philippines",
+    "Google Ads Philippines", "hotel and resort websites Philippines",
+  ]
 
   [params.author]
     name = "The Island Monkeys"

@@ -166,6 +166,25 @@ The `services` list under `[footer]` in `config/_default/params.toml`.
 
 ---
 
+## SEO
+
+| What | Where |
+|---|---|
+| Google headline / browser tab (home) | `seoTitle` in `content/_index.md` (needs our `layouts/partials/head.html` override) |
+| Google snippet (meta description) | `summary` in `content/_index.md` (the hero shows `description` instead) |
+| Site description (fallback + WebSite schema) | `description` in `config/_default/languages.en.toml` |
+| Keywords (meta tag + schema; Google ignores the meta tag) | `keywords` in `config/_default/languages.en.toml` |
+| Local business data for Google (address, areas served, services) | `[seo]` and `[contact]` in `config/_default/params.toml`, output by `layouts/partials/extend-head-uncached.html` |
+| Google Search Console verification | `[verification] google` in `config/_default/params.toml` |
+
+Service areas: **Dumaguete, Dauin, Bohol, Cebu and Davao**. They also appear as visible text in the
+About section and the contact band, which matters more to Google than any meta tag.
+
+After a deploy, check the structured data with https://search.google.com/test/rich-results and
+submit `https://theislandmonkeys.com/sitemap.xml` in Search Console.
+
+---
+
 ## Preview locally
 
 On the server, in `/var/www/islandmonkeys`:
@@ -294,7 +313,8 @@ To upgrade Hugo on the server: download `hugo_extended_<version>_linux-amd64.tar
 `hugo_<version>_checksums.txt` from github.com/gohugoio/hugo/releases, check it with
 `grep <tarball> hugo_<version>_checksums.txt | sha256sum -c -`, then extract `hugo` to `/usr/local/bin/`.
 
-**Our overrides of theme files** (`layouts/partials/footer.html`, `layouts/partials/header/basic.html`)
+**Our overrides of theme files** (`layouts/partials/footer.html`, `layouts/partials/header/basic.html`,
+`layouts/partials/head.html`)
 are copies of the Blowfish originals with small additions. After a theme update, compare them with
 `themes/blowfish/layouts/partials/…` and carry over any upstream changes.
 

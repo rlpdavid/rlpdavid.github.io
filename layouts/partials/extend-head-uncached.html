@@ -1,0 +1,38 @@
+{{/* The Island Monkeys: LocalBusiness (ProfessionalService) structured data for local SEO.
+     Home page only. Data comes from params.toml ([contact], [seo]) and languages.en.toml. */}}
+{{ if .IsHome }}
+  {{ $seo := site.Params.seo }}
+  {{ $contact := site.Params.contact }}
+  {{ $areas := slice }}
+  {{ range $seo.areaServed }}
+    {{ $areas = $areas | append (dict "@type" .type "name" .name) }}
+  {{ end }}
+  {{ $offers := slice }}
+  {{ range $seo.services }}
+    {{ $offers = $offers | append (dict "@type" "Offer" "itemOffered" (dict "@type" "Service" "name" .)) }}
+  {{ end }}
+  {{ $business := dict
+    "@context" "https://schema.org"
+    "@type" "ProfessionalService"
+    "@id" (printf "%s#business" site.Home.Permalink)
+    "name" site.Title
+    "url" site.Home.Permalink
+    "description" site.Params.description
+    "address" (dict
+      "@type" "PostalAddress"
+      "addressLocality" $seo.addressLocality
+      "addressRegion" $seo.addressRegion
+      "addressCountry" $seo.addressCountry)
+    "areaServed" $areas
+    "knowsAbout" $seo.services
+    "makesOffer" $offers
+  }}
+  {{ with site.Params.Logo }}
+    {{ with resources.Get . }}
+      {{ $business = merge $business (dict "logo" .Permalink "image" .Permalink) }}
+    {{ end }}
+  {{ end }}
+  {{ with $contact.email }}{{ $business = merge $business (dict "email" .) }}{{ end }}
+  {{ with $contact.phone }}{{ $business = merge $business (dict "telephone" .) }}{{ end }}
+  <script type="application/ld+json">{{ $business | jsonify | safeJS }}</script>
+{{ end }}

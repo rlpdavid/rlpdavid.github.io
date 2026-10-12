@@ -41,7 +41,8 @@
       {{ $logoLight := "" }}
       {{ with .Params.heroLogoLight }}{{ $logoLight = resources.Get . }}{{ end }}
       {{ if or $logoDark $logoLight }}
-        <div class="landing-rise">
+        {{/* id used by js/header-logo.js: the menu-bar logo stays hidden while this is on screen */}}
+        <div id="im-hero-logo" class="landing-rise">
           {{ with $logoLight }}
             <div class="{{ if $logoDark }}dark:hidden{{ end }}">
               <img class="im-hero-logo nozoom" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $.Site.Title }}">
@@ -84,3 +85,10 @@
     {{ .Content }}
   </div>
 </article>
+
+{{/* Show the menu-bar logo only once the hero logo has scrolled out of view */}}
+{{ with resources.Get "js/header-logo.js" }}
+  {{ $js := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script defer type="text/javascript" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{ end }}
+<noscript><style>.main-menu .logo { opacity: 1 !important; visibility: visible !important; }</style></noscript>

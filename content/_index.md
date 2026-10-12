@@ -1,5 +1,8 @@
 ---
 title: "Elevating Your Digital Real Estate"
+# SEO: browser tab / Google headline, and the Google search snippet (the hero shows "description" below)
+seoTitle: "The Island Monkeys | Web Design & SEO Agency in Dumaguete, Cebu & Davao"
+summary: "Web design, SEO & digital marketing agency for local businesses in Dumaguete, Dauin, Bohol, Cebu and Davao. WordPress, Shopify and Google Ads experts."
 eyebrow: "The Island Monkeys"
 # Hero logos (replace the eyebrow text; remove both to show the eyebrow again):
 #   heroLogoLight = dark lettering for light mode, heroLogo = white lettering for dark mode
@@ -20,6 +23,8 @@ actions:
 ## About Us {#about}
 
 The Island Monkeys is a premier digital agency specializing in high-performance web infrastructure, modern search visibility, and revenue-driven marketing. We partner with hospitality brands and high-growth e-commerce enterprises to architect, manage, and scale digital experiences that capture market share and drive direct revenue.
+
+We partner with local businesses across Dumaguete, Dauin, Bohol, Cebu and Davao.
 
 ### Our Philosophy: Elevating Your "Digital Real Estate"
 
@@ -148,7 +153,7 @@ Insights on web infrastructure, search and marketing.
 
 ## See how we can help you {#contact}
 
-Let's talk about elevating your digital real estate.
+Let's talk about elevating your digital real estate, wherever you are in Dumaguete, Dauin, Bohol, Cebu or Davao.
 
 <div class="im-contact not-prose">
   <a href="mailto:info@theislandmonkeys.com">{{< icon "envelope" >}} info@theislandmonkeys.com</a>

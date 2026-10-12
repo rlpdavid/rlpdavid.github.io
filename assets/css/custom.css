@@ -537,3 +537,19 @@ body {
 .dark .im-band-tint {
   background: rgba(var(--color-neutral-800), 0.55);
 }
+
+/* Home page: hide the menu-bar logo while the hero logo is visible (assets/js/header-logo.js) */
+.main-menu .logo {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+body:has(#im-hero-logo):not(.im-show-header-logo) .main-menu .logo {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main-menu .logo {
+    transition: none;
+  }
+}
