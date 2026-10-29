@@ -22,9 +22,7 @@ actions:
 
 ## About Us {#about}
 
-The Island Monkeys is a premier digital agency specializing in high-performance web infrastructure, modern search visibility, and revenue-driven marketing. We partner with hospitality brands and high-growth e-commerce enterprises to architect, manage, and scale digital experiences that capture market share and drive direct revenue.
-
-We partner with local businesses across Dumaguete, Dauin, Bohol, Cebu and Davao.
+The Island Monkeys is a premier digital agency specializing in high-performance web infrastructure, modern search visibility, and revenue-driven marketing. We partner with hospitality brands and high-growth e-commerce enterprises to architect, manage, and scale digital experiences that capture market share and drive direct revenue. We partner with local businesses across Dumaguete, Dauin, Bohol, Cebu and Davao.
 
 ### Our Philosophy: Elevating Your "Digital Real Estate"
 
@@ -60,27 +58,26 @@ Architecture, search and marketing, managed by one team.
 <div class="im-grid not-prose">
   <div class="im-card">
     <span class="im-card-icon">{{< icon "code" >}}</span>
-    <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Architecture &amp; Dedicated Management</h3>
+    <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Web Development &amp; Management</h3>
     <ul class="text-neutral-600 dark:text-neutral-400">
-      <li>End-to-end development and specialized WordPress management for dynamic content and hospitality sites.</li>
-      <li>Enterprise-grade e-commerce builds utilizing Shopify.</li>
+      <li>Custom WordPress Solutions: Developing and managing end-to-end websites tailored for dynamic content.</li>
+      <li>Shopify Stores: Building robust, e-commerce platforms powered by Shopify.</li>
     </ul>
   </div>
   <div class="im-card">
     <span class="im-card-icon">{{< icon "search" >}}</span>
-    <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Next-Generation Search (SEO &amp; GEO)</h3>
+    <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Future-Proof Search: SEO & AI Discovery</h3>
     <ul class="text-neutral-600 dark:text-neutral-400">
-      <li>High-level Technical, On-Page, and Off-Page SEO to dominate traditional search engine results pages (SERPs).</li>
-      <li>We pioneer Generative Engine Optimization (GEO), structuring your data so that AI platforms (like ChatGPT and Google AI Overviews) confidently cite and recommend your brand or resort.</li>
-      <li>Powered by: GA4, Google Tag Manager, SEMrush, and Ahrefs.</li>
+      <li>Comprehensive technical, on-page, and off-page SEO to help you dominate traditional search engine results.</li>
+      <li>Expert data structuring using AI search best practices, so platforms like ChatGPT and Google AI Overviews confidently cite and recommend your brand.</li>
     </ul>
   </div>
   <div class="im-card">
     <span class="im-card-icon">{{< icon "envelope" >}}</span>
-    <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Performance Marketing &amp; Retention</h3>
+    <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Targeted Marketing  &amp; Retention </h3>
     <ul class="text-neutral-600 dark:text-neutral-400">
-      <li>Driving immediate, high-intent traffic through targeted Google Ads (PPC).</li>
-      <li>Nurturing leads and maximizing lifetime value through automated email marketing campaigns via Klaviyo and Mailchimp.</li>
+      <li>Google Ads: Driving immediate, highly motivated traffic to your site through targeted search campaigns.</li>
+      <li>Nurturing your leads and maximizing lifetime value through automated email campaigns</li>
     </ul>
   </div>
 </div>
@@ -140,9 +137,10 @@ A selection of the brands we build, manage and grow.
   <p class="text-neutral-700 dark:text-neutral-300">Our team is composed of elite, active professionals who are immersed daily in the digital industry’s front lines. We do not rely on outdated agency theory; we execute using the exact, real-time strategies, algorithm updates, and technological trends shaping today's market.</p>
   <p class="text-neutral-700 dark:text-neutral-300">We deliver the agility and personalized attention of a boutique firm, backed by the cutting-edge, enterprise-level expertise of industry insiders.</p>
 </div>
+
 ## From the Blog {#blog}
 
-Insights on web infrastructure, search and marketing.
+Insights on web infrastructure, search, and anything in between.
 
 {{< blog-preview >}}
 
