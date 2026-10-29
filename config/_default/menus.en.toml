@@ -31,8 +31,7 @@
   url = "/#contact"
   weight = 60
 
-# Uncomment once the blog is enabled
-# [[main]]
-#   name = "Blog"
-#   pageRef = "blog"
-#   weight = 70
+[[main]]
+  name = "Blog"
+  pageRef = "blog"
+  weight = 70

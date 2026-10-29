@@ -40,14 +40,44 @@ fingerprintAlgorithm = "sha512"
 
 [article]
   showDate = true
-  showAuthor = true
+  # Author box hidden on posts (the author is still in the page's structured data)
+  showAuthor = false
   showReadingTime = true
-  showBreadcrumbs = false
+  showWordCount = false
+  showBreadcrumbs = true
   showEdit = false
+  # Big feature image at the top of each post (uses the post's feature* image)
+  showHero = true
+  heroStyle = "big"
+  showTableOfContents = true
+  showReadingProgress = true
+  showPagination = true
+  showRelatedContent = true
+  relatedContentLimit = 3
+  sharingLinks = ["linkedin", "facebook", "whatsapp", "email"]
+  # Category badge under the date on posts and on the blog cards. Tags are hidden there (showTags = false);
+  # on a post they show in the right-hand column instead (layouts/_default/single.html).
+  showTaxonomies = true
+  showTags = false
 
 [list]
-  showBreadcrumbs = false
+  showBreadcrumbs = true
   groupByYear = false
+  # Blog index as a grid of cards with the feature image and summary
+  cardView = true
+  showSummary = true
+  featureImageHover = true
+
+# /categories/ and /tags/ overview pages
+[taxonomy]
+  showTermCount = true
+  showBreadcrumbs = true
+
+# A single category or tag page, e.g. /categories/seo-geo/
+[term]
+  showBreadcrumbs = true
+  groupByYear = false
+  cardView = true
 
 # -- The Island Monkeys: contact details (used by the footer) --
 [contact]

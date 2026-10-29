@@ -1,0 +1,10 @@
+{{/* Tags box for a blog post (used by layouts/_default/single.html).
+     The category shows as a badge under the date (theme default); tags are listed here, each linking to its list page. */}}
+{{ with .GetTerms "tags" }}
+  <aside class="im-terms not-prose" aria-label="Tags">
+    <p class="im-terms-label">Tags</p>
+    <div class="im-terms-list">
+      {{ range . }}<a class="im-term-tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}
+    </div>
+  </aside>
+{{ end }}

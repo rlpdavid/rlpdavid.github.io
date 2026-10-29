@@ -553,3 +553,90 @@ body:has(#im-hero-logo):not(.im-show-header-logo) .main-menu .logo {
     transition: none;
   }
 }
+
+/* Blog post: Tags box (layouts/partials/post-terms.html) */
+.im-terms {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  background: rgb(var(--color-neutral-100));
+}
+
+.dark .im-terms {
+  background: rgba(var(--color-neutral-700), 0.5);
+}
+
+.im-terms-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgb(var(--color-neutral-500));
+}
+
+.im-terms-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.im-terms-list:last-child {
+  margin-bottom: 0;
+}
+
+/* Tags: small outlined chips */
+.im-term-tag {
+  padding: 0.15rem 0.6rem;
+  border: 1px solid rgb(var(--color-neutral-300));
+  border-radius: 0.375rem;
+  font-size: 0.8rem;
+  color: rgb(var(--color-neutral-600));
+  text-decoration: none;
+}
+
+.im-term-tag:hover {
+  border-color: rgb(var(--color-primary-500));
+  color: rgb(var(--color-primary-600));
+}
+
+.dark .im-term-tag {
+  border-color: rgb(var(--color-neutral-600));
+  color: rgb(var(--color-neutral-300));
+}
+
+.dark .im-term-tag:hover {
+  border-color: rgb(var(--color-primary-400));
+  color: rgb(var(--color-primary-300));
+}
+
+/* Blog pages: their own background to set them apart from the company pages.
+   Marker <meta> in layouts/partials/extend-head-uncached.html. Light: pale ocean tint + faint dot grid.
+   Dark: solid deep background with the same dots, no animated backdrop (calmer for reading). */
+html:has(#im-blog-page) body {
+  background-color: rgb(var(--color-primary-50));
+  background-image: radial-gradient(rgba(var(--color-primary-300), 0.35) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-attachment: fixed;
+}
+
+html.dark:has(#im-blog-page) body {
+  background-color: rgb(var(--color-neutral-900));
+  background-image: radial-gradient(rgba(var(--color-neutral-600), 0.35) 1px, transparent 1px);
+}
+
+html:has(#im-blog-page) .im-canvas {
+  display: none;
+}
+
+/* Tags box: white card so it stands out on the tinted blog background */
+html:has(#im-blog-page) .im-terms {
+  background: rgb(255 255 255 / 0.8);
+  border: 1px solid rgba(var(--color-primary-200), 0.8);
+}
+
+html.dark:has(#im-blog-page) .im-terms {
+  background: rgba(var(--color-neutral-800), 0.8);
+  border-color: rgb(var(--color-neutral-700));
+}

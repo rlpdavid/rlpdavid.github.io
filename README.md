@@ -20,7 +20,7 @@ Dumaguete City, Philippines.
 5. [Preview locally](#preview-locally)
 6. [Publishing (going live)](#publishing-going-live)
 7. [Customers section](#customers-section)
-8. [Enabling the blog](#enabling-the-blog)
+8. [Blog](#blog-1)
 9. [Changing the look](#changing-the-look)
 10. [Updating the theme or Hugo](#updating-the-theme-or-hugo)
 11. [Editing with VS Code](#editing-with-vs-code)
@@ -54,7 +54,7 @@ modelled on [insightcreative.com](https://insightcreative.com/).
 | 4 | **Industry Specializations** | `#industries` | Luxury Hospitality & Resorts, Global E-Commerce |
 | 5 | **Our Customers** | `#customers` | 4 project tiles (**placeholders**, see [Customers section](#customers-section)) |
 | 6 | **Why Us** | `#why-us` | "The Active Practitioner Edge" highlight panel |
-| 7 | **From the Blog** | – | 3 "Coming soon" cards until the blog is enabled |
+| 7 | **From the Blog** | – | 3 newest blog posts ("Coming soon" cards if none) |
 | 8 | **Contact band** | `#contact` | Full-width blue call-to-action with email, phone, WhatsApp, location |
 | 9 | **Footer** | – | Copyright, light/dark switch, scroll-to-top. A 3-column block (contact, menu, services) can be switched on with `showColumns` in `params.toml` |
 
@@ -69,7 +69,7 @@ Practitioner Edge").
 islandmonkeys/
 ├── content/
 │   ├── _index.md                  ← ALL home page text (edit this most)
-│   └── blog/_index.md             ← Blog section (currently disabled)
+│   └── blog/_index.md             ← Blog page (posts in content/blog/<post>/)
 ├── config/_default/
 │   ├── hugo.toml                  ← Site URL, theme, build options
 │   ├── languages.en.toml          ← Site title, SEO description, tagline
@@ -84,7 +84,8 @@ islandmonkeys/
 │   ├── partials/favicons.html     ← Favicons generated from assets/img/favicon.jpg
 │   └── shortcodes/
 │       ├── customer.html          ← {{< customer >}} project tile
-│       └── blog-preview.html      ← {{< blog-preview >}} latest posts / "coming soon"
+│       ├── blog-preview.html      ← {{< blog-preview >}} latest posts / "coming soon"
+│       └── blog-categories.html   ← {{< blog-categories >}} category pills on /blog/
 ├── assets/
 │   ├── css/custom.css             ← All site-specific styling (classes start with im-)
 │   └── img/
@@ -249,16 +250,58 @@ You can add or remove lines freely. The grid shows 2 tiles per row on desktop an
 
 ---
 
-## Enabling the blog
+## Blog
 
-The blog section exists but is **switched off**: `/blog/` is not built and does not appear in the menu.
-The home page shows three "Coming soon" cards instead.
+The blog is at `/blog/` (menu: **Blog**). The home page "From the Blog" section shows the 3 newest posts
+automatically.
 
-To turn it on:
-1. In `content/blog/_index.md`, delete the two `build:` blocks.
-2. Add posts as `content/blog/<post-name>/index.md`, for example:
-   ```markdown
-   ---
+### Where posts live
+
+```
+content/blog/
+├── _index.md               the Blog page itself (title, intro, category pills)
+└── demo-post/              one folder = one post; the folder name is the URL (/blog/demo-post/)
+    ├── index.md            the post text + settings at the top
+    └── feature.png         header image (1200x630)
+```
+
+`demo-post` is a **template** with `draft: true`: it only shows in the local preview (`hugo server -D`)
+and is never published. Keep it for copying.
+
+### Adding a post
+
+1. Copy `content/blog/demo-post/` to `content/blog/<your-post-slug>/` (lowercase, hyphens).
+2. In `index.md`, set `title`, `date`, `summary`/`description`, `categories`, `tags`, and `draft: false`.
+3. Replace the placeholder text with the article.
+4. Add a header image whose file name contains `feature` (e.g. `seo-tips-dumaguete-feature.jpg`, 1200x630)
+   and delete `feature.png`. To use a name without "feature", set `featureimage: "name.jpg"` and
+   `images: ["name.jpg"]` in the front matter (the second one is the social-share image).
+5. Check it at http://192.168.1.45:1313/blog/, then push.
+
+### Categories and tags
+
+- **Category** = the main topic, one per post (e.g. "SEO and GEO"; avoid "&", it makes messy URLs). **Tags** = specific keywords, 2-5 per post.
+- They are free text; a new name creates its own page (`/categories/<name>/`, `/tags/<name>/`) listing its posts.
+  Use the same spelling every time.
+- **Blog list / cards** show the category only (tags hidden via `showTags = false`). The Blog page also has a
+  "browse by category" row (`layouts/shortcodes/blog-categories.html`).
+- **On a post**, the category is a badge under the date (theme default), and tags sit in the right-hand column
+  under the table of contents, or after the article on phones: `layouts/partials/post-terms.html`, styles
+  `.im-term*` in `custom.css`, added via the theme override `layouts/_default/single.html` (re-check it after a
+  theme upgrade).
+- Overviews: `/categories/` and `/tags/`.
+- Settings: `[taxonomies]` in `config/_default/hugo.toml`; `showTaxonomies`, `[taxonomy]` and `[term]` in `params.toml`.
+
+### Author
+
+The author box is hidden (`showAuthor = false` under `[article]` in `params.toml`).
+
+### Hiding the blog again
+
+In `content/blog/_index.md`, add the `build:` blocks shown in its comments, wrap the home page section
+in `{{</* hide */>}}`, and comment out the **Blog** menu entry.
+
+---
    title: "Why GEO Matters for Resorts"
    date: 2026-11-01
    summary: "One-sentence summary shown on the home page."
@@ -281,6 +324,7 @@ The home page then shows the 3 newest posts and a "View all articles" link autom
 | Spacing, cards, bands, footer columns | `assets/css/custom.css` (all custom classes start with `im-`) |
 | Hero layout | `layouts/partials/home/custom.html` (uses Blowfish v3's `landing-rise`, `hero-canvas-fade`, `hero-scroll-fade.js` and `cta-button` pieces) |
 | Animated backdrop | `assets/img/site-background.svg` (+ `site-background-static.svg` for reduced motion): behind the hero in light mode, behind the whole page in dark mode |
+| Blog background | "Blog pages" block at the end of `assets/css/custom.css` (pale blue dot grid; dark mode: plain dark, no animation). Applies to `/blog/`, posts and `/categories/`, `/tags/` pages via a marker in `layouts/partials/extend-head-uncached.html` |
 | Favicon | Put `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png` and `apple-touch-icon.png` in `static/` |
 
 The CSS uses the theme's colour variables (e.g. `rgb(var(--color-primary-600))`), so a colour scheme

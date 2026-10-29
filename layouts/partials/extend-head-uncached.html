@@ -36,3 +36,9 @@
   {{ with $contact.phone }}{{ $business = merge $business (dict "telephone" .) }}{{ end }}
   <script type="application/ld+json">{{ $business | jsonify | safeJS }}</script>
 {{ end }}
+
+{{/* Blog pages (posts, blog list, category/tag pages) get their own background:
+     this marker switches it on via html:has(#im-blog-page) in custom.css. */}}
+{{ if or (eq .Section "blog") (in (slice "taxonomy" "term") .Kind) }}
+  <meta id="im-blog-page" name="im-section" content="blog">
+{{ end }}

@@ -1,0 +1,9 @@
+{{/* "Browse by category" pills for the blog page (content/blog/_index.md).
+     Lists every category with its post count; renders nothing until a post has a category. */}}
+{{ with site.Taxonomies.categories }}
+  <div class="im-pills im-cat-pills not-prose">
+    {{ range .ByCount }}
+      <a class="im-pill" href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }} ({{ .Count }})</a>
+    {{ end }}
+  </div>
+{{ end }}
